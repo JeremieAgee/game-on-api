@@ -1,20 +1,25 @@
 // routes/tournamentRoutes.js
-const express = require('express');
-import { createTournament, deleteTournament, getTournaments, updateTournament } from "../utils/tournamentUtil"
-const authenticateUser = require('../middleware/authMiddleware');
+const express = require("express");
+import {
+	createTournament,
+	deleteTournament,
+	getTournaments,
+	updateTournament,
+} from "../middleware/tournamentsMiddleware";
+const authenticateUser = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 // Create a tournament (protected)
-router.post('/', authenticateUser, createTournament);
+router.post("/", authenticateUser, createTournament);
 
 // Get all tournaments (public)
-router.get('/', getTournaments);
+router.get("/", getTournaments);
 
 // Update a tournament (protected)
-router.put('/:id', authenticateUser, updateTournament);
+router.put("/:id", authenticateUser, updateTournament);
 
 // Delete a tournament (protected)
-router.delete('/:id', authenticateUser, deleteTournament);
+router.delete("/:id", authenticateUser, deleteTournament);
 
 module.exports = router;

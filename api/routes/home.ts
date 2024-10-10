@@ -5,5 +5,5 @@ export default function home(
 	response: Response,
 	next: NextFunction
 ) {
-	response.json({ message: "welcome to our server" });
+	response.json({ message: "Welcome to Game On's personal API" });
 }
