@@ -1,7 +1,7 @@
 // Imports
 import { Request, Response, NextFunction } from "express";
 
-// Nor Found Error Handling Middleware
+// Not Found Error Handling Middleware
 export default function notFound(
 	error: Error,
 	request: Request,
@@ -10,6 +10,6 @@ export default function notFound(
 ) {
 	console.error(error.stack); // Log the error stack trace for debugging purposes
 	response.status(404).json({
-		error: "Resource not found. Try again or try different spot",
+		error: "Resource not found. Try again or try a different location",
 	});
 }
