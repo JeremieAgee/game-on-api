@@ -1,63 +1,50 @@
-import { Request, Response } from "express";
+
+import { Tournament } from "../utils/tournament";
 // Create a tournament
 import { supabaseDB } from "../database/supabaseDb";
-const createTournament = async (req: Request, res: Response) => {
-	const { name, game, platform, prize, startDate, startTime } = req.body;
-	const currentTournament = {
-		name,
-		game,
-		platform,
-		prize,
-		startDate,
-		startTime,
-	};
+const createTournament = async (currentTournament: Tournament) => {
 	const { data, error } = await supabaseDB.post(
 		"/tournaments",
 		currentTournament
 	);
-	if (error) {
-		return res.status(400).json({ error: error.message });
+	if(error){
+		return error
 	}
-
-	res.status(201).json(data[0]);
+	currentTournament.updateId(data.id)
+	return currentTournament;
 };
 
 // Get all tournaments
-const getTournaments = async (req: Request, res: Response) => {
+const getTournaments = async () => {
 	const { data, error } = await supabaseDB.get("/tournaments");
 	if (error) {
-		return res.status(400).json({ error: error.message });
+		return error;
 	}
-	res.status(200).json(data);
+	return data.data;
 };
 
 // Update a tournament
-const updateTournament = async (req: Request, res: Response) => {
-	const { id } = req.params;
-	const { name, game, platform, prize, startDate, startTime } = req.body;
-	const newTournament = { name, game, platform, prize, startDate, startTime };
+const updateTournament = async (id: number, tournament: Tournament) => {
 	const { data, error } = await supabaseDB.put(
-		"/tournaments",
-		id,
-		newTournament
+	  "/tournaments",
+	  id,
+	  tournament
 	);
-
+  
 	if (error) {
-		return res.status(400).json({ error: error.message });
+	  // Handle error, pass it back for the higher-level function to deal with it
+	  throw new Error(error.message);
 	}
-
-	res.status(200).json(data[0]);
-};
-
+	return data.data; // Return the updated tournament data
+  };
+  
 // Delete a tournament
-const deleteTournament = async (req: Request, res: Response) => {
-	const { id } = req.params;
-
+const deleteTournament = async (id: number) => {
 	const { data, error } = await supabaseDB.delete("/tournaments", id);
 	if (error) {
-		return res.status(400).json({ error: error.message });
+		return error
 	}
-	res.status(200).json({ message: "Tournament deleted" });
+	return data.data
 };
 
 export { createTournament, getTournaments, updateTournament, deleteTournament };

@@ -1,11 +1,12 @@
 import home from "./routes/home";
-
 // server.js
+import { Site } from "./utils/siteClass";
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const tournamentRoutes = require("./routes/tournaments");
-
+import {authenticateUser} from "./middleware/authMiddleware" 
+const thisSite = new Site("GameON")
+const PORT = process.env.PORT;
 // Initialize Express app
 const app = express();
 
@@ -14,13 +15,13 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/tournaments", tournamentRoutes);
+app.use(authenticateUser);
 
-// Root endpoint
+
 app.get("/", home);
 
-// Start server
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
+
+app.listen(PORT, async () => {
+	await thisSite.setSite();
 	console.log(`Server running on port ${PORT}`);
 });

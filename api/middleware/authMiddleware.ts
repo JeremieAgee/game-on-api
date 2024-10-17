@@ -5,7 +5,7 @@ interface AuthenticatedRequest extends Request {
 	user?: User; // Add the optional user property
 }
 
-const authenticateUser = async (
+export const authenticateUser = async (
 	req: AuthenticatedRequest,
 	res: Response,
 	next: NextFunction
