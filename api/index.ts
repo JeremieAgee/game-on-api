@@ -20,9 +20,12 @@ app.use(express.json());
 
 app.get("/", home);
 app.get("/games", thisSite.getAllGames);
-app.get("/tournaments", thisSite.getAllTournaments);
 app.get("/genre", thisSite.getAllGenre);
-
+app.get("/platforms", thisSite.getAllPlatforms);
+app.get("/tournaments", thisSite.getAllTournaments);
+app.post("/tournaments", thisSite.addTournament);
+app.put("/tournaments/:id", thisSite.updateTournament);
+app.delete("/tournaments/:id", thisSite.deleteTournament);
 
 app.listen(PORT, async () => {
 	await thisSite.setSite();

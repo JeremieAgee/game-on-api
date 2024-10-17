@@ -64,7 +64,7 @@ export class Site {
 		console.log(this.platforms);
 		console.log(this.genre);
 	};
-	addTournamentDb = async (req: Request, res: Response) => {
+	addTournament = async (req: Request, res: Response) => {
 		const {
 			hostId,
 			gameId,
@@ -185,4 +185,7 @@ export class Site {
     getAllGenre = (req: Request, res: Response) => {
         res.status(200).json(this.genre)  
     }
+	getAllPlatforms = (req: Request, res: Response)=>{
+		res.status(200).json(this.platforms);
+	}
 }
