@@ -20,8 +20,12 @@ app.use(express.json());
 
 app.get("/", home);
 app.get("/games", thisSite.getAllGames);
+app.get("/games/genre/:id", thisSite.getGamesByGenre);
+app.get("/games/platorms/:id", thisSite.getGamesByPlatform);
+
 app.get("/genre", thisSite.getAllGenre);
 app.get("/platforms", thisSite.getAllPlatforms);
+
 app.get("/tournaments", thisSite.getAllTournaments);
 app.post("/tournaments", thisSite.addTournament);
 app.put("/tournaments/:id", thisSite.updateTournament);

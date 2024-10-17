@@ -10,6 +10,7 @@ import {
 import { Request, Response } from "express";
 import { Genre } from "./genre";
 import { getGames, getPlatforms, getGenre } from "../middleware/dbMiddleware";
+import { platform } from "os";
 export class Site {
 	name: string;
 	platforms: Platform[];
@@ -157,6 +158,7 @@ export class Site {
 		}
 	};
 	findGamesByGenre = (genreId: number) => {
+		const genre = this.findGenreById(genreId);
 		const foundGames = this.games.filter((game: Game) => {
 			return game.genreId === genreId;
 		});
@@ -176,6 +178,14 @@ export class Site {
 			throw new Error(`No genre found`);
 		}
 	};
+	findPlatformById = (platformId: number)=>{
+		const platform = this.platforms.find((item: Platform)=>{return item.id===platformId});
+		if(platform){
+			return platform;
+		} else {
+			throw new Error(`No platform found`)
+		}
+	}
 	getAllGames = (req: Request, res: Response) => {
         res.status(200).json(this.games);
     };
@@ -187,5 +197,17 @@ export class Site {
     }
 	getAllPlatforms = (req: Request, res: Response)=>{
 		res.status(200).json(this.platforms);
+	}
+	getGamesByGenre = (req:Request, res:Response)=>{
+		const games = this.findGamesByGenre(Number(req.params.id));
+		res.status(200).json(games);
+	}
+	getGamesByPlatform = (req:Request, res:Response)=>{
+		const platform = this.findPlatformById(Number(req.params.id));
+		let games: Game[] = [];
+		platform.games.forEach((item: number)=>{
+			games.push(this.findGameById(item))
+		})
+		res.status(200).json(games)
 	}
 }
