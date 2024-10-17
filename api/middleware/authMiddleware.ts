@@ -4,8 +4,7 @@ import { Request, Response, NextFunction } from "express";
 interface AuthenticatedRequest extends Request {
 	user?: User; // Add the optional user property
 }
-
-export const authenticateUser = async (
+const authenticateUser = async (
 	req: AuthenticatedRequest,
 	res: Response,
 	next: NextFunction
@@ -38,4 +37,4 @@ export const authenticateUser = async (
 	}
 };
 
-module.exports = authenticateUser;
+export default authenticateUser;

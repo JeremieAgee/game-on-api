@@ -34,7 +34,8 @@ export class Site {
 		const platforms = await getPlatforms();
 		const genre = await getGenre();
 		const tournaments = await getTournaments();
-		this.tournaments = tournaments.map((item: Tournament) => {
+		if(tournaments){
+			this.tournaments = tournaments.map((item: Tournament) => {
 			return new Tournament(
 				item.hostId,
 				item.gameId,
@@ -45,12 +46,13 @@ export class Site {
 				item.startTime,
 				item.maxPlayers,
 				item.tournamentStyle,
-				item.playerIds,
+				item.playerNames,
 				item.id
 			);
-		});
+		});}
+		
 		this.games = games.map((obj: Game) => {
-			return new Game(obj.name, obj.genreId, obj.id);
+			return new Game(obj.title, obj.genreId, obj.id);
 		});
 		this.platforms = platforms.map((item: Platform) => {
 			return new Platform(item.name, item.games, item.id);
@@ -58,6 +60,9 @@ export class Site {
 		this.genre = genre.map((item: Genre) => {
 			return new Genre(item.name, item.id);
 		});
+		console.log(this.games);
+		console.log(this.platforms);
+		console.log(this.genre);
 	};
 	addTournamentDb = async (req: Request, res: Response) => {
 		const {

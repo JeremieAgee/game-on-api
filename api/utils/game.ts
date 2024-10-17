@@ -1,10 +1,12 @@
 export class Game{
-    name: string;
-    genreId: number;
     id: number;
-    constructor(name: string, genreId: number, id?: number){
-        this.name = name;
-        this.genreId = genreId;
+    title: string;
+    genreId: number;
+
+    constructor(title: string, genreId: number, id?: number){
         this.id = id?? 0;
+        this.title = title;
+        this.genreId = genreId;
+        
     };
 }

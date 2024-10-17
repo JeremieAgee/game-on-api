@@ -12,7 +12,8 @@ const postGame = async (game: Game) => {
 	if (error) {
 		return error;
 	}
-	return data.data;
+	
+	return data;
 };
 
 // Get all games
@@ -21,7 +22,7 @@ const getGames = async () => {
 	if (error) {
 		return error
 	}
-	return data.data;
+	return data;
 };
 
 //Create a platform
@@ -34,7 +35,7 @@ const postPlatform = async (platform: Platform) => {
 		return error;
 	}
 
-	return data.data
+	return data
 };
 
 // Get all platforms
@@ -55,7 +56,7 @@ const postGenre = async (genre: Genre) => {
 	if (error) {
 		return error;
 	}
-	return data.data;
+	return data;
 };
 
 // Get all genre for games
@@ -64,7 +65,7 @@ const getGenre = async () => {
 	if (error) {
 		return error
 	}
-	return data.data;
+	return data;
 };
 
 export { postGame, getGames, postPlatform, getPlatforms, postGenre, getGenre };

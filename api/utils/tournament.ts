@@ -1,5 +1,6 @@
 
 export class Tournament {
+	id: number;
 	hostId: number;
 	gameId: number;
 	genreId: number;
@@ -9,8 +10,8 @@ export class Tournament {
 	startTime: Date;
 	maxPlayers: number;
 	tournamentStyle: string;
-	playerIds: number[];
-	id: number;
+	playerNames: string[];
+	
 	constructor(
 		hostId: number,
 		gameId: number,
@@ -21,7 +22,7 @@ export class Tournament {
 		startTime: Date | string,
 		maxPlayers: number,
 		tournamentStyle: string,
-		playerIds: number[],
+		playerNames: string[],
         id?: number,
 	) {
         this.id = id ?? 0;
@@ -34,7 +35,7 @@ export class Tournament {
         this.startTime = new Date(startTime);
         this.maxPlayers = maxPlayers;
         this.tournamentStyle = tournamentStyle;
-        this.playerIds = playerIds;
+        this.playerNames = playerNames;
 	}
     updateId = (newId: number)=>{
         this.id = newId;
@@ -49,9 +50,9 @@ export class Tournament {
         this.startTime = newTournament.startTime;
         this.maxPlayers = newTournament.maxPlayers;
         this.tournamentStyle = newTournament.tournamentStyle;
-        this.playerIds = newTournament.playerIds;
+        this.playerNames = newTournament.playerNames;
     }
-    addPlayer = (playerId: number)=>{
-        this.playerIds.push(playerId);
+    addPlayer = (playerName: string)=>{
+        this.playerNames.push(playerName);
     }
 }
