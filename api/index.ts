@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-//app.use(authenticateUser);
+app.use(authenticateUser);
 
 
 app.get("/", home);
