@@ -36,6 +36,7 @@ export class Site {
 		if(this.set){
 			return
 		}
+		this.set = true;
 		const games = await getGames();
 		const platforms = await getPlatforms();
 		const genre = await getGenre();
@@ -66,7 +67,7 @@ export class Site {
 		this.genre = genre.map((item: Genre) => {
 			return new Genre(item.name, item.id);
 		});
-		this.set = true;
+		
 	};
 	addTournament = async (req: Request, res: Response) => {
 		const {
