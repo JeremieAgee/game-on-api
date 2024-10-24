@@ -6,9 +6,7 @@ const cors = require("cors");
 require("dotenv").config();
 import authenticateUser from "./middleware/authMiddleware";
 const thisSite = new Site("GameON");
-async function setSight(){
- await thisSite.setSite();
-}
+
 const corsOptions = {
     origin: process.env.CLIENT_URL, // Replace with your client's origin
     // Allowed HTTP methods
@@ -16,8 +14,9 @@ const corsOptions = {
 };
 // Initialize Express app
 const app = express();
-setSight();
 // Middleware
+(async()=>{
+    await thisSite.setSite();
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -39,4 +38,4 @@ app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
 
-module.exports = app;
+module.exports = app;})();
