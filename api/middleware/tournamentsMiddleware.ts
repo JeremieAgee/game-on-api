@@ -20,7 +20,8 @@ const getTournaments = async () => {
 	if (error) {
 		return error;
 	}
-	return data.data;
+	console.log(data)
+	return data;
 };
 
 // Update a tournament

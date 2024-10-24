@@ -4,8 +4,8 @@ import { Site } from "./utils/siteClass";
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-import authenticateUser from "./middleware/authMiddleware"; 
-const thisSite = new Site("GameON")
+import authenticateUser from "./middleware/authMiddleware";
+const thisSite = new Site("GameON");
 const PORT = process.env.PORT;
 // Initialize Express app
 const app = express();
@@ -17,8 +17,6 @@ app.use(express.json());
 // Routes
 app.use(authenticateUser);
 
-
-app.get("/", home);
 app.get("/games", thisSite.getAllGames);
 app.get("/games/genre/:id", thisSite.getGamesByGenre);
 app.get("/games/platorms/:id", thisSite.getGamesByPlatform);
@@ -29,6 +27,8 @@ app.get("/platforms", thisSite.getAllPlatforms);
 app.get("/tournaments", thisSite.getAllTournaments);
 app.post("/tournaments", thisSite.addTournament);
 app.put("/tournaments/:id", thisSite.updateTournament);
+app.put("/tournaments/:id/player", thisSite.addPlayerToTournament);
+app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
 app.listen(PORT, async () => {
