@@ -11,7 +11,7 @@ async function setSight(){
 }
 const corsOptions = {
     origin: process.env.CLIENT_URL, // Replace with your client's origin
-    methods: ['GET', 'POST'], // Allowed HTTP methods
+    // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
 };
 // Initialize Express app
