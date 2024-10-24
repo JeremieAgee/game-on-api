@@ -14,7 +14,7 @@ const app = express();
 app.use(cors(process.env.CLIENT_URL));
 app.use(express.json());
 
-
+app.use(thisSite.setSite());
 // Routesa
 app.use(authenticateUser);
 
@@ -32,8 +32,5 @@ app.put("/tournaments/:id/player", thisSite.addPlayerToTournament);
 app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
-app.listen( async()=>{
-    await thisSite.setSite();
-    console.log(`Hello`)
-})
+
 module.exports = app;
