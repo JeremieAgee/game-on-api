@@ -20,7 +20,6 @@ const app = express();
 (async () => {
 	await thisSite.setSite(); // Wait for the site setup to complete
 })();
-	app.use(cors(corsOptions));
 	app.use(express.json());
 
 	// Routes without authentication
