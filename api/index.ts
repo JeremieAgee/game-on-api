@@ -6,15 +6,16 @@ const cors = require("cors");
 require("dotenv").config();
 import authenticateUser from "./middleware/authMiddleware";
 const thisSite = new Site("GameON");
+
 // Initialize Express app
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors(process.env.CLIENT_URL));
 app.use(express.json());
 
-app.use(thisSite.setSite);
-// Routes
+
+// Routesa
 app.use(authenticateUser);
 
 app.get("/games", thisSite.getAllGames);
@@ -31,5 +32,6 @@ app.put("/tournaments/:id/player", thisSite.addPlayerToTournament);
 app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
-
-module.exports = app;
+app.listen(async()=>{
+    await thisSite.setSite();
+})

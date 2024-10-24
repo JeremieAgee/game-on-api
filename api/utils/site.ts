@@ -32,7 +32,7 @@ export class Site {
 		this.tournaments = tournaments ?? [];
 		this.set = 0;
 	}
-	setSite = async (req: Request, res: Response, next: NextFunction) => {
+	setSite = async () => {
 		if(this.set>0){
 			return
 		}
