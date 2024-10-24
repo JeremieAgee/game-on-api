@@ -9,11 +9,16 @@ const thisSite = new Site("GameON");
 async function setSight(){
  await thisSite.setSite();
 }
+const corsOptions = {
+    origin: process.env.CLIENT_URL, // Replace with your client's origin
+    methods: ['GET', 'POST'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+};
 // Initialize Express app
 const app = express();
 setSight();
 // Middleware
-app.use(cors(process.env.CLIENT_URL));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routesa
