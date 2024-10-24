@@ -32,7 +32,8 @@ app.put("/tournaments/:id/player", thisSite.addPlayerToTournament);
 app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
-app.listen(async()=>{
+app.listen( async()=>{
     await thisSite.setSite();
+    console.log(`Hello`)
 })
 module.exports = app;
