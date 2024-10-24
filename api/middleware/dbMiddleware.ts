@@ -1,7 +1,5 @@
 import { supabaseDB } from "../database/supabaseDb";
-import { Genre } from "../utils/genre";
-import { Game } from "../utils/game";
-import { Platform } from "../utils/siteClasses";
+import { Platform, Genre, Game } from "../utils/siteClasses";
 
 // Create a game
 const postGame = async (game: Game) => {
