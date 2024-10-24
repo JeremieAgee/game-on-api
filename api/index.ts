@@ -35,3 +35,4 @@ app.delete("/tournaments/:id", thisSite.deleteTournament);
 app.listen(async()=>{
     await thisSite.setSite();
 })
+module.exports = app;
