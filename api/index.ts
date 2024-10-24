@@ -1,6 +1,6 @@
 
 // server.js
-import { Site } from "./utils/siteClass";
+import { Site } from "./utils/site";
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();

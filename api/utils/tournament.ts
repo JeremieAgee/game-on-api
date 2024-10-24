@@ -1,4 +1,4 @@
-import Player from "./player";
+import { Player } from "./siteClasses";
 export class Tournament {
 	hostId: string;
 	gameId: number;

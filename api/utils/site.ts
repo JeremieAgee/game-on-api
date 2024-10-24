@@ -1,6 +1,5 @@
 import { Tournament } from "./tournament";
-import { Game } from "./game";
-import { Platform } from "./platform";
+import { Platform, Genre, Game, Player } from "./siteClasses";
 import {
 	createTournament,
 	deleteTournament,
@@ -8,9 +7,9 @@ import {
 	updateTournament,
 } from "../middleware/tournamentsMiddleware";
 import { NextFunction, Request, Response } from "express";
-import { Genre } from "./genre";
+
 import { getGames, getPlatforms, getGenre } from "../middleware/dbMiddleware";
-import Player from "./player";
+
 
 export class Site {
 	name: string;
