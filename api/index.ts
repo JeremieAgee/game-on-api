@@ -6,15 +6,16 @@ const cors = require("cors");
 require("dotenv").config();
 import authenticateUser from "./middleware/authMiddleware";
 const thisSite = new Site("GameON");
-
+async function setSight(){
+ await thisSite.setSite();
+}
 // Initialize Express app
 const app = express();
-
+setSight();
 // Middleware
 app.use(cors(process.env.CLIENT_URL));
 app.use(express.json());
 
-app.use(thisSite.setSite());
 // Routesa
 app.use(authenticateUser);
 
