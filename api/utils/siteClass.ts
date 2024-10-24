@@ -7,7 +7,7 @@ import {
 	getTournaments,
 	updateTournament,
 } from "../middleware/tournamentsMiddleware";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Genre } from "./genre";
 import { getGames, getPlatforms, getGenre } from "../middleware/dbMiddleware";
 import Player from "./player";
@@ -18,6 +18,7 @@ export class Site {
 	genre: Genre[];
 	games: Game[];
 	tournaments: Tournament[];
+	set: boolean;
 	constructor(
 		name: string,
 		platforms?: Platform[],
@@ -30,8 +31,12 @@ export class Site {
 		this.genre = genre ?? [];
 		this.games = games ?? [];
 		this.tournaments = tournaments ?? [];
+		this.set = false;
 	}
-	setSite = async () => {
+	setSite = async (req: Request, res: Response, next: NextFunction) => {
+		if(this.set){
+			return
+		}
 		const games = await getGames();
 		const platforms = await getPlatforms();
 		const genre = await getGenre();
@@ -62,6 +67,7 @@ export class Site {
 		this.genre = genre.map((item: Genre) => {
 			return new Genre(item.name, item.id);
 		});
+		this.set = true;
 	};
 	addTournament = async (req: Request, res: Response) => {
 		const {

@@ -1,10 +1,11 @@
-import home from "./routes/home";
+
 // server.js
 import { Site } from "./utils/siteClass";
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 import authenticateUser from "./middleware/authMiddleware";
+import { NextFunction } from "express";
 const thisSite = new Site("GameON");
 const PORT = process.env.PORT;
 // Initialize Express app
@@ -14,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(thisSite.setSite);
 // Routes
 app.use(authenticateUser);
 
@@ -31,7 +33,5 @@ app.put("/tournaments/:id/player", thisSite.addPlayerToTournament);
 app.delete("/tournaments/:id/player", thisSite.removePlayerFromTournament);
 app.delete("/tournaments/:id", thisSite.deleteTournament);
 
-app.listen(PORT, async () => {
-	await thisSite.setSite();
-	console.log(`Server running on http://localhost:${PORT}`);
-});
+
+module.exports = app;
