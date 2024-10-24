@@ -19,6 +19,7 @@ const app = express();
 
 (async () => {
 	await thisSite.setSite(); // Wait for the site setup to complete
+})();
 	app.use(cors(corsOptions));
 	app.use(express.json());
 
@@ -39,6 +40,4 @@ const app = express();
 	app.delete("/tournaments/:id", thisSite.deleteTournament);
 	app.use(notFound);
 	app.use(genericError);
-})();
-
 module.exports = app;
