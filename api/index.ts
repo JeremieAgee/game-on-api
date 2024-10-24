@@ -5,9 +5,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 import authenticateUser from "./middleware/authMiddleware";
-import { NextFunction } from "express";
 const thisSite = new Site("GameON");
-const PORT = process.env.PORT;
 // Initialize Express app
 const app = express();
 
