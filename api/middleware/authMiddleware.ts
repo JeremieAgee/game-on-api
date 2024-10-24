@@ -1,5 +1,5 @@
 const supabase = require("../database/supabaseClient"); // Make sure this points to the correct Supabase client setup
-import { User } from "@supabase/supabase-js";
+import { User } from '@supabase/supabase-js';
 import { Request, Response, NextFunction } from "express";
 interface AuthenticatedRequest extends Request {
 	user?: User; // Add the optional user property
