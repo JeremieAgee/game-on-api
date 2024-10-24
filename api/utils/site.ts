@@ -17,7 +17,7 @@ export class Site {
 	genre: Genre[];
 	games: Game[];
 	tournaments: Tournament[];
-	set: boolean;
+	set: number;
 	constructor(
 		name: string,
 		platforms?: Platform[],
@@ -30,13 +30,14 @@ export class Site {
 		this.genre = genre ?? [];
 		this.games = games ?? [];
 		this.tournaments = tournaments ?? [];
-		this.set = false;
+		this.set = 0;
 	}
 	setSite = async (req: Request, res: Response, next: NextFunction) => {
-		if(this.set){
+		if(this.set>0){
 			return
 		}
-		this.set = true;
+		this.set++;
+		console.log(this.set);
 		const games = await getGames();
 		const platforms = await getPlatforms();
 		const genre = await getGenre();
